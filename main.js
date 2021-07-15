@@ -1,23 +1,80 @@
-var images = ["https://pngtree.com/freepng/illustration-of-hand-painted-family-members_3692495.html",
-    "https://pngtree.com/freepng/fashion-teenager-pattern-element-design_4084237.html",
-    "https://pngtree.com/freepng/father_5622295.html",
-    "https://pngtree.com/freepng/chibi-boy-with-glasses_3782196.html",
-    "https://pngtree.com/freepng/cooking-mom_5634813.html",
-    "https://pngtree.com/freepng/pink-baby-girl_5502576.html"
-]
-var name = ["Family book", "Ranbir Singh", "Diljeet Singh", "Rocky Singh", "Soni Singh", "Alia Singh"]
+var canvas = document.getElementById('myCanvas');
+var ctx;
+ctx = canvas.getContext("2d");
+var nasa_mars_images_array = ["nasa_image_1.jpg", "nasa_image_2.jpeg", "nasa_image_3.jpg", "nasa_image_4.jpg"];
+var random_number = Math.floor(Math.random() * 4);
+console.log(random_number);
+var rover_width = 100;
+var rover_height = 90;
+background_image = nasa_mars_images_array[random_number];
+console.log("background_image = " + background_image);
+rover_image = "rover.png";
+var rover_x = 10;
+var rover_y = 10;
 
-vari = 0;
-
-function update() {
-
-    i++;
-    var numbers_of_family_members_in_array = 5
-    if (i > numbers_of_family_members_in_array) {
-        i = 0
-    }
-    var updatedimage = images[i];
-    var updatedname = names[i];
-    document.getElementById("family_member_image").src = updatedimage;
-    document.getElementById("family_mem_name").innerHTML = updatedname;
+function add() {
+    background_imgTag = new Image();
+    background_imgTag.onload = uploadBackground;
+    background_imgTag.src = background_image;
+    rover_imgTag = new Image();
+    rover_imgTag.onload = uploadrover;
+    rover_imgTag.src = rover_image;
 }
+
+function uploadBackground() { ctx.drawImage(background_imgTag, 0, 0, canvas.width, canvas.height); }
+
+function uploadrover() { ctx.drawImage(rover_imgTag, rover_x, rover_y, rover_width, rover_height); }
+window.addEventListener("keydown", my_keydown);
+
+function my_keydown(e) {
+    keyPressed = e.keyCode;
+    console.log(keyPressed);
+    if (keyPressed == '38') {
+        up();
+        console.log("up");
+    }
+    if (keyPressed == '40') {
+        down();
+        console.log("down");
+    }
+    if (keyPressed == '37') {
+        left();
+        console.log("left");
+    }
+    if (keyPressed == '39') {
+        right();
+        console.log("right");
+    }
+}
+
+function uploadBackground() { ctx.drawImage(background_imgTag, 0, 0, canvas.width, canvas.height); }
+
+function uploadrover() { ctx.drawImage(rover_imgTag, rover_x, rover_y, rover_width, rover_height); }
+window.addEventListener("keydown", my_keydown);
+
+function my_keydown(e) { keyPressed = e.keyCode;
+    console.log(keyPressed); if (keyPressed == '38') { up();
+        console.log("up"); } if (keyPressed == '40') { down();
+        console.log("down"); } if (keyPressed == '37') { left();
+        console.log("left"); } if (keyPressed == '39') { right();
+        console.log("right"); } }
+
+function up() { if (rover_y >= 0) { rover_y = rover_y - 10;
+        console.log("When up arrow is pressed, x = " + rover_x + " | y = " + rover_y);
+        uploadBackground();
+        uploadrover(); } }
+
+function down() { if (rover_y <= 500) { rover_y = rover_y + 10;
+        console.log("When down arrow is pressed, x = " + rover_x + " | y = " + rover_y);
+        uploadBackground();
+        uploadrover(); } }
+
+function left() { if (rover_x >= 0) { rover_x = rover_x - 10;
+        console.log("When left arrow is pressed, x = " + rover_x + " | y = " + rover_y);
+        uploadBackground();
+        uploadrover(); } }
+
+function right() { if (rover_x <= 700) { rover_x = rover_x + 10;
+        console.log("When right arrow is pressed, x = " + rover_x + " | y = " + rover_y);
+        uploadBackground();
+        uploadrover(); } }
